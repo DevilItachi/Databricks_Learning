@@ -1,0 +1,2 @@
+- select * from delta.`path` # this is for delta table search
+- select * from 
