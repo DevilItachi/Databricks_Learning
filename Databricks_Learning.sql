@@ -23,3 +23,91 @@ describe catalog mini_project;
 use catalog mini_project;
 describe schema bronze;
 
+
+-- COMMAND ----------
+
+use catalog mini_project;
+show tables dropped in bronze;
+
+-- COMMAND ----------
+
+undrop table bronze.employees
+
+-- COMMAND ----------
+
+insert into bronze.employees values (1,'amit')
+
+-- COMMAND ----------
+
+drop table bronze.employees
+
+-- COMMAND ----------
+
+select * from bronze.employees
+
+-- COMMAND ----------
+
+show tables in bronze
+
+-- COMMAND ----------
+
+show catalogs;
+
+
+-- COMMAND ----------
+
+show catalogs like '*in*'
+
+-- COMMAND ----------
+
+-- DBTITLE 1,Cell 15
+use catalog mini_project;
+show schemas in mini_project like '*r*';
+
+-- COMMAND ----------
+
+show tables in mini_project.bronze like '*ers*'
+
+-- COMMAND ----------
+
+describe history  mini_project.bronze.customers
+
+-- COMMAND ----------
+
+-- DBTITLE 1,Untitled
+SELECT * FROM mini_project.bronze.customers VERSION AS OF 0
+
+-- COMMAND ----------
+
+create view vw_customers as select * from mini_project.bronze.customers;
+
+
+-- COMMAND ----------
+
+create temporary view tmp_customers as select * from mini_project.bronze.customers
+
+-- COMMAND ----------
+
+-- DBTITLE 1,Cell 21
+CREATE OR REPLACE GLOBAL TEMP VIEW gb_tmp_customers AS SELECT * FROM mini_project.bronze.customers;
+
+-- COMMAND ----------
+
+Create table  pyspark_python.pyspark.csv_table_tmp  as select * from pyspark_python.pyspark.csv_table
+
+-- COMMAND ----------
+
+select * from pyspark_python.pyspark.csv_table_tmp
+
+-- COMMAND ----------
+
+create table pyspark_python.pyspark.csv_table_deep Deep clone pyspark_python.pyspark.csv_table;
+select * from pyspark_python.pyspark.csv_table_deep
+
+-- COMMAND ----------
+
+create table pyspark_python.pyspark.csv_table_shallow shallow clone pyspark_python.pyspark.csv_table;
+
+-- COMMAND ----------
+
+select * from pyspark_python.pyspark.csv_table_shallow
