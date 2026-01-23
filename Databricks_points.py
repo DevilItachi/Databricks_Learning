@@ -8,7 +8,7 @@
             - Deleting manage table deletes the data and metadata. 
         - external table is created in a different location
             - Deleting external table deletes the metadata but not the data. Can undrop the table to restore the data.
-        - Manage and external this can created for Catalog, schema, table.
+        - Manage and external this can created for Catalog, schema, table, VOlumes
 - select current_catalog(), current_schema()
 - describe catalog mini_project
 - describe schema bronze
@@ -41,5 +41,68 @@
         - It will still point to version of source wehn it ws created.
         - Gets impacted when source table is vaccumed.
 - Vacuum
-        - vacuum table pyspark_python.pyspark.csv_table_deep retain 0 hours; # deletes all data files older than
-- 
+        - vacuum table pyspark_python.pyspark.csv_table_deep retain 0 hours;
+        - Delta tables keep old files for time travel & rollback.
+        - VACUUM is what physically cleans storage
+        - Default behavior: Removes files older than 7 days (168 hours)
+- Deletion Vector
+        - deletion vector is a file that contains information about which rows have been deleted from a table.
+        - When a table is vacuumed, the deletion vector is used to identify which data files can be deleted.
+        - The deletion vector is stored in the table's metadata and is updated whenever a row is deleted from the table.
+        - The table properties needs to be enabled for Deletion Vector.
+        - Data is not rewritten, rather the row in parquet file will be flagged as deleted.
+- Liquid Clustering
+        - WHen liquid clustering is enabled on a column in table the incremental data will automatically get adjusted as per cluster column.
+        - Alter table pyspark_python.pyspark.csv_table_deep cluster by (col_name);
+        - Can have multiple columns
+- DBUTILS
+        - used for creating folder, widget, move files, list directories
+- CLuster
+        - compute means cluster or group or virtual macahines to work is called cluster
+        - 2 types 
+            1. Interactive cluster
+            2. Job cluster
+- Idompotent pipeline
+        - The ability to execute the same operation multiple times without changing the result at target end.
+- COPY INTO
+        - Once you load a file via COPY INTO command , you cant reload the same file again even if you run the command multiple times.
+        - This is very good option for retry & idompotent
+        - Tables used for COPY INTO command doesnt have any columns to begin with.
+- Autoloader
+        - Autoloader is a streaming source that can be used to read data from a variety of file formats.
+        - Autoloader is an utility that we can use in order to incrementally & efficiently process new files that are arriving in your cloud storage.
+        - Can be used with both streaming and batch mode.
+        - Uses checkpoints in order to manage & incrementally process new files.
+        - File Detection mode
+            - 1. Directory listing - use API calls to detect new files (DEFAULT)
+            - 2. File notification - use notification & queue services 
+        - If we rerun the cell again and again it wont load data multiple time. IT will load only once.
+        - Handles Schema evolution
+            - Scehma evoultion - addNEWColumns -- adds new column to schema
+                               - rescue -- all new columns data is recorded in resecue columns
+                               - none --  new columns are ignored 
+                               - FailOnNewColumn - Stream fails if new columns are coming 
+- Schema Managements and Secrets
+        - There might be a requirement to put some credentials or sensitive url passwords or host names into your notebooks or jobs.
+        - Its  not a good practice to put these as plain strings.
+        - Sceret scope is somrthing where you can add your secrets and then later use them in your notebooks and jobs.
+        2 types of secret scopes
+            1. Azure Key Vault
+            2. Databricks Secret Scope
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

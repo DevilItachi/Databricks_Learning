@@ -111,3 +111,29 @@ create table pyspark_python.pyspark.csv_table_shallow shallow clone pyspark_pyth
 -- COMMAND ----------
 
 select * from pyspark_python.pyspark.csv_table_shallow
+
+-- COMMAND ----------
+
+Alter table pyspark_python.pyspark.csv_table_deep cluster by (index_id);
+
+-- COMMAND ----------
+
+-- MAGIC %python
+-- MAGIC dbutils.help()
+
+-- COMMAND ----------
+
+--copy into
+
+create table pyspark_python.pyspark.tbl_copy_into;
+
+-- COMMAND ----------
+
+-- DBTITLE 1,Cell 30
+COPY INTO pyspark_python.pyspark.tbl_copy_into
+FROM '/Volumes/mini_project/cmn_dev_schema/ext_volume/inbound/Customers_20260120.csv'
+FILEFORMAT_OPTIONS (
+  'format' = 'CSV',
+  'header' = 'true'
+);
+
