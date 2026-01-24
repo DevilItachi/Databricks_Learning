@@ -89,9 +89,19 @@
         2 types of secret scopes
             1. Azure Key Vault
             2. Databricks Secret Scope
-
-
-
+- Users , Service principal and Groups
+        - Users - individual users
+        - Groups - collection of users
+        - Service principal (SPN) - are used to run jobs & do automation stuff
+- Databricks Unity Catalog
+        - Databricks Unity Catalog is a cloud-native data governance and security platform that provides a unified view of all data assets across your organization.
+- Row Level Filters in unity catalog
+        - Hiding sensitive data is very imp part of data governance
+        - Row level filters are used to hide sensitive data from users who are not authorized to see it.
+        - Create a function & then apply this function to that table as row level filter.
+- Column level masking
+        - Hiding/masking full column data to specific users.
+        - Create a function & then apply this function to that table 
 
 
 
