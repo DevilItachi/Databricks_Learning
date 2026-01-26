@@ -1,5 +1,6 @@
 -- Databricks notebook source
 -- DBTITLE 1,Cell 1
+-- select data for a table from path where file is stored
 select * from parquet.`/Volumes/pyspark_python/pyspark/ext_vol/Output/sample6/` limit 5
 
 -- COMMAND ----------
@@ -9,6 +10,14 @@ describe detail mini_project.bronze.customers
 -- COMMAND ----------
 
 describe extended mini_project.bronze.customers
+
+-- COMMAND ----------
+
+describe history mini_project.bronze.customers
+
+-- COMMAND ----------
+
+select * from mini_project.bronze.customers version as of 17;
 
 -- COMMAND ----------
 
@@ -137,3 +146,26 @@ FILEFORMAT_OPTIONS (
   'header' = 'true'
 );
 
+
+-- COMMAND ----------
+
+create catalog project_1
+
+-- COMMAND ----------
+
+use catalog project_1;
+create schema autoloader;
+
+-- COMMAND ----------
+
+CREATE TABLE IF NOT EXISTS customers (
+    CustomerID    STRING,
+    FullName      STRING,
+    Email         STRING,
+    SignUpDate    STRING,     -- kept STRING in Bronze
+    City          STRING,
+    Country       STRING,
+    _rescued_data STRING,
+    _file         STRING
+)
+USING DELTA
