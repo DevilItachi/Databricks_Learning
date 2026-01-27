@@ -138,34 +138,10 @@ create table pyspark_python.pyspark.tbl_copy_into;
 
 -- COMMAND ----------
 
--- DBTITLE 1,Cell 30
-COPY INTO pyspark_python.pyspark.tbl_copy_into
-FROM '/Volumes/mini_project/cmn_dev_schema/ext_volume/inbound/Customers_20260120.csv'
-FILEFORMAT_OPTIONS (
-  'format' = 'CSV',
-  'header' = 'true'
-);
-
+-- MAGIC %python
+-- MAGIC df = spark.read.csv("/Volumes/project_1/autoloader/ext_vol/input/1/Customers_1.csv")
 
 -- COMMAND ----------
 
-create catalog project_1
-
--- COMMAND ----------
-
-use catalog project_1;
-create schema autoloader;
-
--- COMMAND ----------
-
-CREATE TABLE IF NOT EXISTS customers (
-    CustomerID    STRING,
-    FullName      STRING,
-    Email         STRING,
-    SignUpDate    STRING,     -- kept STRING in Bronze
-    City          STRING,
-    Country       STRING,
-    _rescued_data STRING,
-    _file         STRING
-)
-USING DELTA
+-- MAGIC %python
+-- MAGIC display(df)

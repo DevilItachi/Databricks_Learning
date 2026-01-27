@@ -64,6 +64,10 @@
         - Can have multiple columns. 
 - DBUTILS
         - used for creating folder, widget, move files, list directories
+        - dbutils.fs -- used to play with files and folders
+        - dbutils.notebook -- run another notebook or exit the notebook with a value
+        - dbutils.widgets -- used for widgets which makes notebook parameterize
+        - 1 notebook can call other notebook as well as pass parameters to that widgets
 - CLuster
         - compute means A cluster is a group of VMs used to execute Spark workloads.
         - 2 types 
@@ -107,6 +111,10 @@
                 - create secrets
                 - in notebooks with help of dbutils we can play with secrets. 
                 - Secrets is within scope
+        - Secret management > token , password , API keys
+        - key management > encryption keys
+        - certificate management > TLS/SSL cerificates 
+        - store secrets backed by hardware security modules
 - Users , Service principal and Groups
         - Users - individual users
         - Groups - collection of users
